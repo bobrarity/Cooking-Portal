@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load blog_tags %}
+
+{% block main %}
+        <h2>Cooking Portal</h2>
+        <div class="d-flex justify content between">
+            <div class="col-3">
+                {% get_all_categories as categories %}
+                {% include 'web_site/components/_sidebar.html' %}
+            </div>
+
+            <div class="col-9">
+                {% for post in posts %}
+                    {% include 'web_site/components/_card.html' %}
+                <br>
+                {% endfor %}
+            </div>
+
+        </div>
+{% endblock main %}

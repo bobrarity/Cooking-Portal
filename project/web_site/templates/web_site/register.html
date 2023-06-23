@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<br>
+<br>
+<br>
+<div class="d-flex justify-content-center">
+    <div class="card col-4 mb-4 mt-4">
+        <div class="card-body">
+            <h2 class="text-center">Sign up</h2>
+            <form action="" method="post">
+                {% csrf_token %}
+                {% include 'components/_form_errors.html' %}
+
+                <div class="form-floating flex-fill mb-4">
+                    {{ form.username }}
+                    <label for="{{ form.username.id_for_label }}">
+                        <i class="fa-solid fa-user"></i> Username
+                    </label>
+                </div>
+
+                <div class="form-floating flex-fill mb-4">
+                    {{ form.first_name }}
+                    <label for="{{ form.first_name.id_for_label }}">
+                        <i class="fa-solid fa-user"></i> Name
+                    </label>
+                </div>
+
+                <div class="form-floating flex-fill mb-4">
+                    {{ form.last_name }}
+                    <label for="{{ form.last_name.id_for_label }}">
+                        <i class="fa-solid fa-user"></i> Surname
+                    </label>
+                </div>
+
+                <div class="form-floating flex-fill mb-4">
+                    {{ profile_form.bio }}
+                    <label for="{{ profile_form.bio.id_for_label }}">
+                        <i class="fa-solid fa-book"></i> Bio (optional)
+                    </label>
+                </div>
+
+                <div class="form-floating flex-fill mb-4">
+                    {{ form.email }}
+                    <label for="{{ form.email.id_for_label }}">
+                        <i class="fa-solid fa-envelope"></i> Email
+                    </label>
+                </div>
+
+                <div class="form-floating flex-fill mb-4">
+                    {{ profile_form.address }}
+                    <label for="{{ profile_form.address.id_for_label }}">
+                        <i class="fa-solid fa-location-dot"></i> Address (optional)
+                    </label>
+                </div>
+
+                <div class="form-floating flex-fill mb-4">
+                    {{ profile_form.phone }}
+                    <label for="{{ profile_form.phone.id_for_label }}">
+                        <i class="fa-solid fa-phone"></i> Phone (optional)
+                    </label>
+                </div>
+
+                <div class="form-floating flex-fill mb-4">
+                    {{ profile_form.mobile }}
+                    <label for="{{ profile_form.mobile.id_for_label }}">
+                        <i class="fa-solid fa-mobile"></i> Mobile (optional)
+                    </label>
+                </div>
+
+                <div class="form-floating flex-fill mb-4">
+                    {{ profile_form.website }}
+                    <label for="{{ profile_form.website.id_for_label }}">
+                        <i class="fa-brands fa-chrome"></i> Website (optional)
+                    </label>
+                </div>
+
+                <div class="form-floating flex-fill mb-4">
+                    {{ profile_form.github }}
+                    <label for="{{ profile_form.github.id_for_label }}">
+                        <i class="fa-brands fa-github"></i> Github (optional)
+                    </label>
+                </div>
+
+                <div class="form-floating flex-fill mb-4">
+                    {{ profile_form.twitter }}
+                    <label for="{{ profile_form.twitter.id_for_label }}">
+                        <i class="fa-brands fa-twitter"></i> Twitter (optional)
+                    </label>
+                </div>
+
+                <div class="form-floating flex-fill mb-4">
+                    {{ profile_form.instagram }}
+                    <label for="{{ profile_form.instagram.id_for_label }}">
+                        <i class="fa-brands fa-instagram"></i> Instagram (optional)
+                    </label>
+                </div>
+
+                <div class="form-floating flex-fill mb-4">
+                    {{ profile_form.facebook }}
+                    <label for="{{ profile_form.facebook.id_for_label }}">
+                        <i class="fa-brands fa-facebook"></i> Facebook (optional)
+                    </label>
+                </div>
+
+                <div class="form-floating flex-fill mb-4">
+                    {{ form.password1 }}
+                    <label for="{{ form.password1.id_for_label }}">
+                        <i class="fa-solid fa-key"></i> Password
+                    </label>
+                    <input type="checkbox" class="form-check-input" id="box" onclick="reveal()"> Show password
+                </div>
+
+                <div class="form-floating flex-fill mb-4">
+                    {{ form.password2 }}
+                    <label for="{{ form.password2.id_for_label }}">
+                        <i class="fa-solid fa-key"></i> Confirm password
+                    </label>
+                </div>
+
+
+                <script type="text/javascript">
+                    function reveal()
+                    {
+                        if (document.getElementById('box').checked)
+                        {
+                            document.getElementById('id_password1').type='text';
+                        }
+                        else
+                        {
+                            document.getElementById('id_password1').type='password';
+                        }
+                    }
+
+                </script>
+                <button class="btn btn-dark">Sign up</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock main %}

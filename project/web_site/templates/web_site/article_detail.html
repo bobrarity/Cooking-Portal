@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<br>
+<div class="d-flex justify-content-between">
+    <div class="col-8">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between">
+                {{ post.category.title }}
+
+                <div>
+                    {% if request.user.pk == post.author.pk %}
+                    <a href="{% url 'post_update' post.pk %}" class="btn btn-dark">Edit</a>
+                    <a href="{% url 'post_delete' post.pk %}" class="btn btn-dark">Delete</a>
+                    {% endif %}
+                    <a href="{% url 'index' %}" class="btn btn-dark">Back</a>
+                </div>
+            </div>
+
+            <img src="" class="card-img-top" alt="">
+
+            <div class="card-body">
+                {% if post.photo %}
+                <img src="{{ post.photo.url }}" alt="" width="830">
+                {% else %}
+                <img src="https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F23%2F2020%2F01%2F02%2Fcooking.jpg"
+                     alt="" width="830">
+                {% endif %}
+
+
+                <h5 class="card-title">{{ post.title }}</h5>
+                <p class="card-text">{{ post.content|linebreaks }}</p>
+
+            </div>
+            <div class="card-footer d-flex justify-content-between">
+                <p class="card-text">{{ post.created_at }}</p>
+                <a href="{% url 'profile' post.author.pk %}" class="link-dark">{{ post.author }}</a>
+                <p class="card-text">{{ post.watched }}</p>
+
+            </div>
+        </div>
+        <br>
+        {% if request.user.is_authenticated %}
+        <form action="{% url 'add_comment' post.pk %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% include 'components/_form_errors.html' %}
+            {{ comment_form.text }}
+            <button class="btn btn-dark" type="submit">Add comment</button>
+        </form>
+        {% endif %}
+
+        {% for comment in comments %}
+
+        <div class="card mt-2">
+            <h5 class="card-header">{{ comment.user.username }}</h5>
+            <div class="card-body">
+                <p class="card-text">{{ comment.text }}</p>
+            </div>
+
+        </div>
+
+        {% endfor %}
+    </div>
+
+    <div class="col-3">
+
+        {% for post in posts %}
+        <div class="card" style="width: 18rem;">
+            {% if post.photo %}
+            <img class="card-img-top" src="{{ post.photo.url }}" alt="" width="830">
+            {% else %}
+            <img class="card-img-top" src="https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F23%2F2020%2F01%2F02%2Fcooking.jpg"
+                 alt="" width="830">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ post.title }}</h5>
+                <p class="card-text">{{ post.content|truncatewords:20|linebreaks }}</p>
+                <a href="{{ post.get_absolute_url }}" class="btn btn-dark">More</a>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+
+</div>
+
+
+{% endblock main %}

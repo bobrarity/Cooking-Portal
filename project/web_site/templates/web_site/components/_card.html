@@ -1,0 +1,20 @@
+<div class="card text-center">
+    <div class="card-header">
+        {{ post.category }}
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">{{ post.title }}</h5>
+        <p class="card-text">{{ post.content|truncatewords:20|linebreaks }}</p>
+        {% if post.photo %}
+        <img src="{{ post.photo.url }}" alt="" width="500">
+        {% else %}
+        <img src="https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F23%2F2020%2F01%2F02%2Fcooking.jpg" alt="" width="500">
+        {% endif %}
+        <br>
+        <br>
+        <a href="{{ post.get_absolute_url }}" class="btn btn-dark">More</a>
+    </div>
+    <div class="card-footer text-muted">
+        {{ post.created_at }}
+    </div>
+</div>
